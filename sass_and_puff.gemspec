@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = SassAndPuff::VERSION
   spec.authors       = ["Ben Hull", "Luke Matthew Sutton"]
   spec.email         = ["lukeandben@spookandpuff.com"]
-  spec.description   = %q{A set of SASS extensions for building responsive websites.}
-  spec.summary       = %q{A set of SASS extensions for building responsive websites.}
+  spec.description   = %q{A set of helpful SASS extensions.}
+  spec.summary       = %q{A set of helpful SASS extensions.}
   spec.homepage      = "http://spookandpuff.com"
   spec.license       = "MIT"
 
