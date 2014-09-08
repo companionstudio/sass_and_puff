@@ -141,7 +141,7 @@ $aspect-iphone5: '40/71'
 // Example:
 //     +apply_to(smaller-than, iphone-portrait)
 // will apply CSS to anything smaller than an iPhone-portrait
-=apply_to($ltgt, $device, $dimension: width)
+=apply-to($ltgt, $device, $dimension: width)
 
   $extrema: null
 
@@ -184,13 +184,13 @@ $aspect-iphone5: '40/71'
         @content
 
 
-=apply_to_range($min, $max, $dimension: width)
+=apply-to-range($min, $max, $dimension: width)
 
   @media only screen and (min-#{$dimension} : $min) and (max-#{$dimension} : $max)
     @content
 
 
-=apply_to_aspect($ltgt, $ratio)
+=apply-to-aspect($ltgt, $ratio)
   $extrema: null
 
   @if $ltgt == less-than
