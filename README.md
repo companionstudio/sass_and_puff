@@ -18,7 +18,41 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Once you've installed gem, you'll be able to import the SassAndPuff stylesheets
+into your own. The library gives you fine grained control over what you import 
+if needed.
+
+To use everything the library provides, do this:
+
+    @import sass_and_puff
+
+Individual modules can be imported easily:
+
+    @import sass_and_puff/responsive
+
+## Responsive
+
+    @import sass_and_puff/responsive
+
+Provides mixins for designing responsive sites. The mixins break down into two 
+main categories. The first are based on responding to canonical device types 
+e.g. iphone, ipad. The second set is for more fine-grained control based on 
+things like screen width/height
+
+### Mixins
+
+* orientation-portrait
+* orientation-landscape
+* respond-to
+* respond-to-aspect
+* apply-to-range
+* apply-to-aspect
+
+## Position
+
+    @import sass_and_puff/position
+
+Shortcuts for positioning elements.
 
 ## Contributing
 
