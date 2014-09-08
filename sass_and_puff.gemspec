@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["lukeandben@spookandpuff.com"]
   spec.description   = %q{A set of SASS extensions for building responsive websites.}
   spec.summary       = %q{A set of SASS extensions for building responsive websites.}
-  spec.homepage      = "spookandpuff.com"
+  spec.homepage      = "http://spookandpuff.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
