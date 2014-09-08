@@ -41,18 +41,23 @@ things like screen width/height
 
 ### Mixins
 
-* orientation-portrait
-* orientation-landscape
-* respond-to
-* respond-to-aspect
-* apply-to-range
-* apply-to-aspect
+* for-portrait
+* for-landscape
+* for-device
+* for-aspect
+* for-breakpoint
 
 ## Position
 
     @import sass_and_puff/position
 
 Shortcuts for positioning elements.
+
+### Mixins
+
+* pos-fixed
+* pos-relative
+* pos-absolute
 
 ## Contributing
 
