@@ -5,4 +5,4 @@ module SassAndPuff
 end
 
 # Add the path to the sass files to SASS' load path.
-Sass.load_paths << File.dirname(__FILE__ + '/sass_and_puff/sass')
+Sass.load_paths << File.expand_path(File.dirname(__FILE__)) + '/sass_and_puff/sass'
