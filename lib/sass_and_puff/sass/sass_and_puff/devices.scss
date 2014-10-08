@@ -1,0 +1,13 @@
+// The list of devices, in the following format:
+// (name, portrait width, landscape width, device-pixel-ratio)
+// This should be done with maps once we can upgrade to SASS 3.3
+$devices: (
+  (iphone3, 320px, 480px, 1),
+  (iphone4, 320px, 480px, 2),
+  (iphone5, 320px, 568px, 2),
+  (iphone6, 375px, 667px, 2),
+  (iphone6plus, 414px, 736px, 3),
+  (ipad, 768px, 1024px, 1),
+  (ipad-retina, 768px, 1024px, 2),
+  (ipad-mini, 768px, 768px, 1)
+);

@@ -24,3 +24,29 @@
     bottom: #{$bottom}
   @if $left
     left: #{$left}
+
+
+//Shortcuts to fill a box absolutely and fixedly
+@mixin pos-absolute-fill
+  +pos-absolute(0,0,0,0)
+
+@mixin pos-fixed-fill
+  +pos-fixed(0,0,0,0)
+
+
+//Create a box of a fixed aspect ratio and its liner element
+@mixin aspect-ratio($ratio, $parent-size: 100%, $liner: '.liner', $axis: vertical)
+  @if $axis = vertical
+    width: $parent-size
+    height: 0
+    overflow: hidden
+    padding-top: $ratio * $parent-size
+  @else
+    height: $parent-size
+    width: 0
+    overflow: hidden
+    padding-left: $ratio * $parent-size
+
+  #{$liner}
+    +pos-absolute-fill
+

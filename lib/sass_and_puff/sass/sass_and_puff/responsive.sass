@@ -1,11 +1,3 @@
-$iphone-portrait: 320px !default
-$iphone-landscape: 480px !default
-
-$iphone5-portrait: 320px !default
-$iphone5-landscape: 568px !default
-
-$ipad-portrait: 768px !default
-$ipad-landscape: 1024px !default
 $desktop: 1025px !default
 $desktop-large: 1280px !default
 $desktop-huge: 1600px !default
@@ -36,66 +28,30 @@ $aspect-iphone5: '40/71' !default
 // Specific device targeting
 // Use: Only use if you want the style to respond to one device
 // Example:
-//     +respond_to(ipad-landscape)
+//     +respond_to(ipad, landscape)
 // will apply CSS only to an iPad at landscape rotation
 
-=for-device($device)
-  @if $device == iphone
-    @media only screen and (min-device-width: $iphone-portrait) and (max-device-width: $iphone-landscape)
-      @content
+=for-device($device, $orientation: any)
+  @each $d in $devices
 
-  @if $device == iphone-landscape
-    @media only screen and (device-width: $iphone-landscape) and (orientation: landscape)
-      @content
+    $name: nth($d, 1)
+    $width: nth($d, 2)
+    $height: nth($d, 3)
+    $ratio: nth($d, 4)
 
-  @if $device == iphone-portrait
-    @media only screen and (device-width: $iphone-portrait) and (orientation: portrait)
-      @content
+    @if $name == $device
+      @if $orientation == portrait
+        @media only screen and (min-device-width: $width) and (max-device-width: $height) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: $ratio)
+          @content
+      @else if $orientation == landscape
+        @media only screen and (min-device-width: $width) and (max-device-width: $height) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: $ratio)
+          @content
+      @else
+        @media only screen and (min-device-width: $width) and (max-device-width: $height) and (-webkit-min-device-pixel-ratio: $ratio)
+          @content
 
-  @if $device == iphone5
-    @media only screen and (device-height: $iphone5-landscape) and (-webkit-min-device-pixel-ratio: 2)
-      @content
 
-  @if $device == iphone5-landscape
-    @media only screen and (device-width: $iphone5-landscape) and (orientation: landscape)
-      @content
-
-  @if $device == iphone5-portrait
-    @media only screen and (device-width: $iphone5-portrait) and (orientation: portrait)
-      @content
-
-  @if $device == ipad
-    @media only screen and (min-width : 768px) and (max-width : 1024px)
-      @content
-
-  @if $device == ipad-landscape
-    @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation: landscape)
-      @content
-
-  @if $device == ipad-portrait
-    @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation: portrait)
-      @content
-
-  @if $device == desktop
-    @media only screen and (min-width: $desktop)
-      @content
-
-  @if $device == desktop-large
-    @media only screen and (min-width: $desktop-large)
-      @content
-
-  @if $device == viewport-short
-    @media only screen and (max-height: $viewport-short)
-      @content
-
-  @if $device == viewport-medium
-    @media only screen and (max-height: $viewport-medium) and (min-height: $viewport-short)
-      @content
-
-  @if $device == viewport-tall
-    @media only screen and (min-height: $viewport-tall)
-      @content
-
+//Apply CSS to a provided or pre-defined aspect ratio viewport
 =for-aspect($ratio)
   @if $ratio == skinny
     @media only screen and (min-aspect-ratio: #{$aspect-skinny})
@@ -133,12 +89,12 @@ $aspect-iphone5: '40/71' !default
     @media only screen and (device-aspect-ratio: #{$aspect-iphone5})
       @content
 
-// General device targeting
+// General breakpoint targeting
 // Use: Only use if you want the style to apply to many devices
 // Example:
 //     +apply_to(smaller-than, iphone-portrait)
 // will apply CSS to anything smaller than an iPhone-portrait
-=for-breakpoint($ltgt, $device, $dimension: width)
+=for-breakpoint($ltgt, $device, $orientation: portrait, $dimension: width)
   $extrema: null
 
   @if $ltgt == less-than
@@ -151,30 +107,75 @@ $aspect-iphone5: '40/71' !default
     @media only screen and (#{$extrema}-#{$dimension}: $device)
       @content
   @else
-    @if $device == iphone-landscape
-      @media only screen and (#{$extrema}-#{$dimension}: $iphone-landscape)
-        @content
+    @each $d in $devices
+      $name: nth($d, 1)
+      $width: nth($d, 2)
+      $height: nth($d, 3)
+      $ratio: nth($d, 4)
 
-    @if $device == iphone-portrait
-      @media only screen and (#{$extrema}-#{$dimension}: $iphone-portrait)
-        @content
+      @if $name == $device
+        @if $orientation == portrait
+          @media only screen and (#{$extrema}-#{$dimension}: $width)
+            @content
+        @else
+          @media only screen and (#{$extrema}-#{$dimension}: $height)
+            @content
 
-    @if $device == ipad-landscape
-      @media only screen and (#{$extrema}-#{$dimension}: $ipad-landscape)
-        @content
 
-    @if $device == ipad-portrait
-      @media only screen and (#{$extrema}-#{$dimension}: $ipad-portrait)
-        @content
+// Bracketed breakpoint targeting
+// Example:
+//     +between-breakpoints(1000px, 2000px)
+// will apply CSS to viewports between 1000 and 2000px wide
+=between-breakpoints($min, $max, $dimension: width)
 
-    @if $device == desktop
-      @media only screen and (#{$extrema}-#{$dimension}: $desktop)
-        @content
+  @media only screen and (min-device-#{$dimension}: $min) and (max-device-#{$dimension}: $max)
+    @content
 
-    @if $device == desktop-large
-      @media only screen and (#{$extrema}-#{$dimension}: $desktop-large)
-        @content
+// Used to test the device config, will set the background colour of the element,
+// and output the device name to the screen
+// Usually it's most useful to put this on html or body
+=device-test
+  $count: 0
+  $color-set: (red, orange, yellow, green, blue, indigo, violet, pink, brown, gray, black)
 
-    @if $device == desktop-huge
-      @media only screen and (#{$extrema}-#{$dimension}: $desktop-huge)
-        @content
+  @each $d in $devices
+    $count: $count + 1
+    $device-name: nth($d, 1)
+
+    +for-device($device-name, portrait)
+      background-color: nth($color-set, $count)
+
+      &:before
+        bottom: 0
+        content: "#{$device-name} - Portrait, #{nth($d, 2)} ✕ #{nth($d, 3)}"
+        display: block
+        font-size: 2em
+        font-weight: bold
+        height: 4em
+        left: 0
+        margin: auto
+        position: absolute
+        right: 0
+        text-align: center
+        top: 0
+        z-index: 10
+
+    +for-device($device-name, landscape)
+      background-color: nth($color-set, $count)
+
+      &:before
+        bottom: 0
+        content: "#{$device-name} - Landscape, #{nth($d, 2)} ✕ #{nth($d, 3)}"
+        display: block
+        font-size: 1.5em
+        font-weight: bold
+        height: 4em
+        left: 0
+        margin: auto
+        position: absolute
+        right: 0
+        text-align: center
+        top: 0
+        z-index: 10
+
+
