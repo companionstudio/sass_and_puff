@@ -36,17 +36,18 @@
 
 //Create a box of a fixed aspect ratio and its liner element
 @mixin aspect-ratio($ratio, $parent-size: 100%, $liner: '.liner', $axis: vertical)
-  @if $axis = vertical
+  position: relative
+  overflow: hidden
+  @if $axis == vertical
     width: $parent-size
     height: 0
-    overflow: hidden
     padding-top: $ratio * $parent-size
   @else
     height: $parent-size
     width: 0
-    overflow: hidden
     padding-left: $ratio * $parent-size
 
-  #{$liner}
-    +pos-absolute-fill
+  @if $liner != false
+    #{$liner}
+      +pos-absolute-fill
 
