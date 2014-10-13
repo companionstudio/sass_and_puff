@@ -1,0 +1,30 @@
+//Defaults
+$sp_aspect-ratio-default-liner-selector: '.liner' !default
+
+// Create a box of a fixed aspect ratio and its liner element
+// $ratio: Provide a ratio as (width / height) 3/2
+
+@mixin aspect-ratio($ratio, $parent-size: 100%, $liner: $sp_aspect-ratio-default-liner-selector)
+  position: relative
+  overflow: hidden
+  height: 0
+  padding-top: $parent-size / $ratio
+  width: $parent-size
+
+  @if $liner != false
+    #{$liner}
+      +pos-absolute-fill
+
+@mixin clear-aspect-ratio($liner: $sp_aspect-ratio-default-liner-selector)
+  overflow: auto
+  height: auto
+  padding-top: 0
+  width: auto
+
+  @if $liner != false
+    #{$liner}
+      position: static
+      left: auto
+      right: auto
+      top: auto
+      bottom: auto

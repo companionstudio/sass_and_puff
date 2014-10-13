@@ -27,24 +27,9 @@
 
 
 //Shortcuts to fill a box absolutely and fixedly
-@mixin pos-absolute-fill
-  +pos-absolute(0,0,0,0)
+@mixin pos-absolute-fill($inset: 0)
+  +pos-absolute($inset,$inset,$inset,$inset)
 
-@mixin pos-fixed-fill
-  +pos-fixed(0,0,0,0)
-
-
-// Create a box of a fixed aspect ratio and its liner element
-// $ratio: Provide a ratio as 3/2
-
-@mixin aspect-ratio($ratio, $parent-size: 100%, $liner: '.liner')
-  position: relative
-  overflow: hidden
-  height: 0
-  padding-top: $parent-size / $ratio
-  width: $parent-size
-
-  @if $liner != false
-    #{$liner}
-      +pos-absolute-fill
+@mixin pos-fixed-fill($inset: 0)
+  +pos-fixed($inset,$inset,$inset,$inset)
 
