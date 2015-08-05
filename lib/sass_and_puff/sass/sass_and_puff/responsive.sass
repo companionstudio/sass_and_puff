@@ -128,7 +128,7 @@ $aspect-iphone5: '40/71' !default
 // will apply CSS to viewports between 1000 and 2000px wide
 =between-breakpoints($min, $max, $dimension: width)
 
-  @media only screen and (min-device-#{$dimension}: $min) and (max-device-#{$dimension}: $max)
+  @media only screen and (min-#{$dimension}: $min) and (max-#{$dimension}: $max)
     @content
 
 // Used to test the device config, will set the background colour of the element,
